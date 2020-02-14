@@ -1,0 +1,45 @@
+version: '3.6'
+services:
+  database:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password --innodb-flush-method=fsync
+    volumes:
+      - "./db/file:/docker-entrypoint-initdb.d"
+      - "./db/sys:/var/lib/mysql"
+    environment:
+      MYSQL_DATABASE: mydb
+      MYSQL_ROOT_PASSWORD: s89053489y6f78dfsdrs3w
+  dbadmin:
+    depends_on:
+      - database
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: database
+      PMA_USER: root
+      PMA_PASSWORD: s89053489y6f78dfsdrs3w
+  mail:
+    image: mailhog/mailhog:latest
+    ports:
+    - 8081:8025
+  www:
+    depends_on:
+     - database
+    build: './docker'
+    ports:
+     - 80:80
+     - 443:443
+    environment:
+      WORDPRESS_DB_HOST: database
+      WORDPRESS_DB_USER: root
+      WORDPRESS_DB_PASSWORD: s89053489y6f78dfsdrs3w
+      WORDPRESS_DB_NAME: mydb
+      WORDPRESS_DEBUG: 1
+      WORDPRESS_CONFIG_EXTRA: |
+        define( 'WP_DEBUG_LOG', '/var/www/html/wp-content/logs/debug.log' );
+        define( 'WP_DEBUG_DISPLAY', false );
+        define( 'SAVEQUERIES', true );
+    volumes:
+      - "./www:/var/www/html"
+      - "./logs:/var/www/html/wp-content/logs"
