@@ -1,6 +1,6 @@
 # Quick-start WordPress with Docker
 This self-contained Docker Compose setup will create the following features:
-* WordPress installation.
+* WordPress installation (localhost, self-signed cert HTTPS available).
 * MariaDB database (PMA on :8080).
 * Catch-all email service (GUI on :8081).
 
@@ -14,7 +14,10 @@ into the WordPress container, and run the following command:
 
 `docker-compose exec www wp search-replace domain.com localhost --skip-columns=guid --allow-root`
 
-## Troubleshooting
+To run multiple instances, change the left-hand port numbers in
+`docker-compose.yml`.
+
+## Troubleshooting and FAQ
 ### 'Error establishing database connection' on new site
 Wait 5-10 minutes after initalising, then run `docker-compose restart www`. It
 seems MariaDB (inc MySQL) doesn't finish setup in time for WordPress to begin
