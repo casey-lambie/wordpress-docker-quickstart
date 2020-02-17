@@ -1,5 +1,5 @@
 db/file/*
-db/sys/*
+db/sys/
 logs/*
 www/*
 !DUMMY
