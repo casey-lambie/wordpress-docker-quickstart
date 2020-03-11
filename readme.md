@@ -6,7 +6,7 @@ This self-contained Docker Compose setup will create the following features:
 
 DB persistence is stored in `db/sys` (created on init). WordPress in `www`.
 
-To start vanilla, run `docker-compose up` on the root of this setup.
+To start vanilla, run `docker-compose up --build` on the root of this setup.
 
 To start with a pre-existing system, store the WP root directory in `www` and a
 database export (.sql) in `db/file`. Start up the system like normal, then exec
