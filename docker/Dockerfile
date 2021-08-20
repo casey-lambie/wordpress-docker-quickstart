@@ -1,5 +1,5 @@
 # Copied from https://github.com/soup-bowl/docker-wordpress-mssql
-FROM wordpress:php7.2
+FROM wordpress:php7.4
 
 # Obtain WP-CLI.
 RUN curl https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar --output /usr/bin/wp \
